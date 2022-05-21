@@ -1,102 +1,108 @@
 
 
 
-import axios from '../api/axios';
+import { fetchConToken, fetchSinToken } from '../api/fetch';
 import { types } from '../types/types'
+import { finishLoading, startLoading } from './ui';
 // import { notesLogout } from './notes';
-// import { finishLoading, startLoading } from "./ui";
 
-
-const LOGIN_URL = "/users/login"
+// const LOGIN_URL = "/users/login"
 
 
 export const startLoginEmailPassword = ( email, password) => {
-  return ( dispatch ) => {   
+  return async( dispatch ) => {   
 
-      // dispatch( startLoading() );
+      dispatch( startLoading() );
 
-      axios
-        .post(
-        LOGIN_URL,
-        JSON.stringify({
-          email, password
-        }),
-        {
-          headers: { "Content-Type": "application/json"},
-          withCredentials: true,
-        }
+      const resp = await fetchSinToken('users/login',
+          { email, password},
+          'POST');      
+      const body = await resp.json();
+        
+      if ( body.ok ){
+        localStorage.setItem('token', body.token);
+        localStorage.setItem('token-init-date', new Date().getTime() );
+        dispatch( login({ 
+          uid: body.uid, 
+          name: body.name } 
+        ))
+        dispatch( finishLoading() );
+      }
+      else {
+        dispatch( authError({
+          error: true,
+          msg: body.msg
+        }))
+        dispatch( finishLoading() );
+      }
 
-        )
-        .then(
-          response => {
-            let data = response.data;
-            console.log(data);
-            // dispatch(login( data ))
-          }
-        )
-        .catch( error => {
-          console.log(`Error: ${ error }`);
-        })
-
-      // firebase.auth().signInWithEmailAndPassword(
-      //   email, 
-      //   password
-      // ).then( ({user}) =>{
-
-      //   dispatch(login( user.uid, user.displayName))    
-      //   dispatch( finishLoading() );
-
-      // }).catch( e => {
-      //   console.log(e);
-      //   dispatch( finishLoading() );
-      //   Swal.fire(
-      //     'Error', e.message, 'error'
-      //   );
-      // }) 
 
   }
 }
 
-// export const startRegisterWithEmailPasswordName = ( email, password, name) => {
+export const startChecking = () => {
+  return async (dispatch) => {
 
-//   return ( dispatch ) => {
-//     firebase.auth().createUserWithEmailAndPassword(
-//       email, password
-//     ).then(  async ({ user }) => {  
+    dispatch( startLoading() );
 
-//       await user.updateProfile( { displayName: name } )
-            
-//       dispatch(
-//         login( user.uid, user.displayName )
-//       );
-      
-//     }).catch( err => {
-//       console.log(err)
-//     })
-//   }
+    const resp = await fetchConToken('users/renew');
+    const body = await resp.json();
+        
+    if ( body.ok ){
+      localStorage.setItem('token', body.token);
+      localStorage.setItem('token-init-date', new Date().getTime() );
+      dispatch( login({ 
+        uid: body.uid, 
+        name: body.name } 
+      ))
+      dispatch( finishLoading() );
+    }
+    else {
 
-// }
+      dispatch( checkingFinish() )
+      dispatch( finishLoading() );
+    }
+
+  }
+}
+
+const checkingFinish = () => ({
+  type: types.authCheckingFinish
+});
+
+const authError = ( error )=>({
+  type: types.authError,
+  payload: {
+    error: error.error,
+    msg: error.msg 
+  }
+})
+
+export const authRemoveError = () => ({
+  type: types.authRemoveError
+})
 
 
-export const login = ( uid, displayName) => ({
+
+const login = ( user ) => ({
     type: types.login,
     payload: {
-      uid, displayName
+      uid: user.uid,
+      name: user.name
     }
   })
 
 
-// export const startLogout = () => {
-//   return async( dispatch ) => {
-//     await firebase.auth().signOut();
+export const startLogout = () => {
+  return ( dispatch ) => {    
 
-//     // dispatch( logout() );
-//     // dispatch( notesLogout() )
+    localStorage.clear();
+    dispatch( logout() );
 
-//   }
-// }
+  }
+}
 
-export const logout = () => ({
+const logout = () => ({
   type: types.logout
 
 })

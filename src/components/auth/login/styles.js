@@ -128,7 +128,6 @@ export const Button = styled.button`
 
   :active { 
     background-color: #020100;
-  }
-  
+  }  
 `
 

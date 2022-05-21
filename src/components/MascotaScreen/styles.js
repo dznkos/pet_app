@@ -63,10 +63,8 @@ export const BoxMascotas = styled.li`
   }
 
   li {
-    display: flex;  
-    
+    display: flex;      
     justify-content: space-between;
-
     align-items: center;
 
     /* width: 880px; */
@@ -79,12 +77,22 @@ export const BoxMascotas = styled.li`
     
   }
 
+  i{
+
+    padding: 4px;
+    border-radius: 15px;
+
+    :active {
+      background-color: #5fdec0;
+    }
+  }
+
 
 `
 
 export const Data = styled.div`
   
-  width: 200px;
+  width: 180px;
 
   display: flex;
 
@@ -102,3 +110,24 @@ export const Data = styled.div`
 
 `
 
+export const ButtonDel = styled.button`
+  
+  width: 30%;  
+  min-height: 40px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+`
+
+export const ButtonCancel = styled.button`
+  
+  width: 30%;   
+  min-height: 40px;
+  border-radius: 10px;
+  background-color: #B6956A;
+  color: white;
+`
+export const Actions = styled.div`
+  
+  display: flex;
+`

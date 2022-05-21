@@ -12,8 +12,6 @@ export const Container = styled.div`
   
   /* justify-content: center; */
 
-  
-
 `
 
 export const Nav = styled.nav`
@@ -26,11 +24,31 @@ export const Nav = styled.nav`
 
   justify-content: end;
   align-items : center;
+
+  h1 {
+    margin-right: 8px;
+    font-size: 0.7rem;
+    color: black;
+  }
+
 `
 
-export const Logout = styled.div`
-  color: #ffffff;
-  font-size: 18px;
+export const Logout = styled.button`
+
+  background-color: #B6956A;
+  color: #FFFFFF;
+  font-weight: 700;
+
+  :hover {
+
+    background-color: #866d4d;
+  }
+
+  :active { 
+    background-color: #020100;
+  }  
+
+  font-size: 18px;  
   line-height: 22px;
   height: 22px;
   margin-right: 48px;  

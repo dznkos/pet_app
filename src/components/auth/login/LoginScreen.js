@@ -1,33 +1,53 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import GlobalStyles from '../../../styles/GlobalStyles'
 import { useForm } from '../../../hooks/useForm';
 
 
 
-import { Button, Container, Error, Form, Input, LoginBox, LoginText } from './styles'
-import { startLoginEmailPassword } from '../../../actions/auth';
+import { Button, Container, 
+         Error, Form, Input, 
+         LoginBox, LoginText } from './styles'
+import { authRemoveError, startLoginEmailPassword } from '../../../actions/auth';
+import ConfirmationModal from '../../../DialogAlert/ModalAlert';
 
 
 export const LoginScreen = () => {
 
   const dispatch = useDispatch();
-  // const { loading } = useSelector( state => state.ui);
+  const load  = useSelector( state => state.auth);
+  const loading = useSelector( state => state.ui);
+
+  // console.log(load);
 
   const [ formValues, handleInputChange ] = useForm({
     email: 'admin@gmail.com',
     password: '123123'
   });
 
-
+  const initialState = false;
   const { email, password} = formValues;
+
+  const [show, setShow] = useState(initialState);
+  // const [hideModal, sethideModal] = useState(initialState);
+
+  const [errorMessages, setErrorMessages] = useState({});
 
   const handleLogin = (e) => {
     e.preventDefault();
     dispatch( startLoginEmailPassword(email, password) )
+    // setShow( true )
 
-    console.log( formValues );
+    dispatch( authRemoveError() )
+
+
   }
+
+  const hideModal = (arg) => {
+    setShow(false);
+    // actOnModalResult(arg);
+};
+
 
   return (
     <>
@@ -53,9 +73,12 @@ export const LoginScreen = () => {
           value={ password }
           onChange={ handleInputChange }
         />
-        <Error>
-          Usuario no existente
-        </Error>
+        {
+          (load.error) 
+          ? <Error> Usuario no existente</Error>
+          : <Error> </Error>
+        }
+        
         <Button 
           type='submit' 
           // disabled={ loading }
@@ -70,6 +93,10 @@ export const LoginScreen = () => {
       </Form>
       </LoginBox>
     </Container>
+    <ConfirmationModal show={show} headerText="Confirm delete item?"
+                    handleClose={hideModal} >
+        {`Permanently delete ?`}
+    </ConfirmationModal>
     <GlobalStyles/>
     </>
   )
