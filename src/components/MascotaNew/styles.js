@@ -170,16 +170,35 @@ export const BoxCreate = styled.div`
   width: 100%;
   max-width: 750px;
   /* background-color :blue ; */
-
   text-align: start;
+  display: flex;
 
- display: flex;
-
- flex-direction: row;
-
- justify-content: flex-start;
-
-
+  flex-direction: row;
+  justify-content: flex-start;
   
+`
+
+export const FileSelector = styled.div`
+
+    width: 100%;
+    height: 100%;
+    max-height:100px;
   
+    border: 2.2px solid #E3E3E3;
+    background: #FFFFFF;
+    border-style: dashed;
+
+    div {
+      height: 100%;
+      display: flex;
+
+      justify-content: center;
+      
+      align-items: center;
+
+      p {
+        padding-left: 6px;
+        color: #E3E3E3;
+      }
+    }
 `

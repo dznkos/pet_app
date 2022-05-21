@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import { useForm } from '../../hooks/useForm';
-import { Container, BoxCreate, Input, Form, TextArea, Select } from './styles'
+import { Container, BoxCreate, Input, Form, TextArea, Select, FileSelector } from './styles'
 
 import { useDispatch, useSelector } from 'react-redux';
 import { petAdd } from '../../actions/pets';
 import { CustomModal } from '../ModalAlert/ModalAlert';
+
+import { AddCircle } from '@styled-icons/fluentui-system-filled/AddCircle'
 
 export const MascotaNew = () => {
 
@@ -37,6 +39,14 @@ export const MascotaNew = () => {
     //                 pet_type_id) );
     // msg alert
     setShowModal( !showModal );
+  }
+
+  const handlePictureClick = () => {
+    document.querySelector('#fileSelector').click();
+  }
+
+  const handleFileChange = (e) => {
+    // e.target.files
   }
 
 
@@ -88,7 +98,22 @@ export const MascotaNew = () => {
             autoComplete='off'
             value={ description }
             onChange={ handleInputChange }
-          />     
+          />
+          <input id="fileSelector"
+                 type="file"
+                 name='file'
+                 style={{ display:'none'}}
+                 onChange={ handleFileChange}
+          />
+          <FileSelector 
+            width="100%"
+            onClick={()=> handlePictureClick() }
+          >
+            <div>
+              <AddCircle width={20} height={20} color={ '#bcb9b9' } />
+              <p>Agrega una imagen de tu mascota</p>
+            </div>
+          </FileSelector>
           <button
             type='submit' >
             Crear mascota
