@@ -24,6 +24,8 @@ const fetchConToken = ( endpoint, data, method = 'GET') => {
 
   const url = `${baseUrl}/${ endpoint }`;
 
+  // if (!localStorage.getItem('token')) return;
+
   const token = localStorage.getItem('token') || '';
 
   if( method === 'GET' ){

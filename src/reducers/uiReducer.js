@@ -4,12 +4,22 @@ const initialState = {
   loading : false
 }
 
-
 export const uiReducer = ( state = initialState, action ) => {
-
 
   switch (action.type) {    
     
+    case types.uiSetError:
+      return {
+        ...state,
+        msgError: action.payload
+      }
+
+    case types.uiRemoveError:
+      return {
+        ...state,
+        msgError: null
+      }
+
     case types.uiStartLoading:
       return {
         ...state,
@@ -21,10 +31,9 @@ export const uiReducer = ( state = initialState, action ) => {
         ...state,
         loading: false
       }
-  
+     
     default:
       return state;
   }
-
 }
 

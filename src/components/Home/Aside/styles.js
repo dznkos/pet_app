@@ -1,70 +1,77 @@
 import styled from "styled-components";
 
-import { NavLink as BaseNavLink } from "react-router-dom";
-
 export const Container = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background-color: #B6956A;
 `
-
-// export const NavLink = styled(BaseNavLink)`
-//   display: flex;
-//   align-items: center;
-//   font-size: 18px;
-//   color: #fff;
-//   font-weight: 600;
-//   text-decoration: none;
-//   padding:8px 3px;
-//   width: 100%;
-
-//   &.active{
-//     color: #5d5d5d
-//   }
-// `
-
-// export const MenuUl = styled.ul`
-  
-//   list-style: none;
-//   display: flex;
-//   flex-direction: column;
-
-//   margin-top:10px;
-
-//   align-items: center;
-
-//   li {
-
-//     :active {      
-//       font-weight: 600;
-//     }
-//   } 
-// `
-
 export const StyleUl = styled.ul`
 
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 750px) {  
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    a {
+      width: 100%;
+    }
+  }
   
   a{
+    min-width: 177px;
     text-decoration: none;
   }
 
   li {
+    width: 100%;
     list-style: none;
     padding: 16px 10px;
-    color: #ffffff;
-    font-size: 18px;
+    font-size: 1.085rem;
     line-height: 22px;
+    color: ${({theme}) => theme.text};;
+    
   }
+
+  a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    
+    li {  
+      font-size: 1.085rem;
+      background-color: rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      color: linear-gradient(66deg, rgba(16,134,79,1) 0%, rgba(0,67,113,1) 100%);
+    }
+    
+  } 
   
-  .current {
+  a.active {
+    color: #ffffff !important;    
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1);    
+    color: linear-gradient(66deg, rgba(16,134,79,1) 0%, rgba(0,67,113,1) 100%);
+
     li {
-      border-bottom: 1px solid blue;
+      background-color: ${({theme})=> theme.navHover};
+      transition: all 0.3s ease;
+    }
+
+    li span {    
+        font-size: 1.285rem;
+        font-weight: 700;
+        background: linear-gradient(to bottom, rgb(255, 252, 121), rgb(61, 191, 52));
+        -webkit-background-clip: text;
+        color: transparent;
+        transition: all 0.4s ease;     
     }
   }
 
-  flex-direction: column;
-  /* align-items: center; */
-  /* text-align: center; */
+  a.inactive {
+    color: #ffffff !important;
+  }
+
+
 `
 

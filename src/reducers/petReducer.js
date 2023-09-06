@@ -5,12 +5,9 @@ const initialState = {
   active: []
 }
 
-
 export const petReducer = ( state = initialState, action ) => {
 
-
-  switch (action.type) {    
-    
+  switch (action.type) {
         
     case types.petClearActive:
       return {
@@ -23,10 +20,21 @@ export const petReducer = ( state = initialState, action ) => {
         ...state,
         pets: [...action.payload ]
       }
+    case types.petLoadImage: 
+      return {
+          ...state,
+          active: { 
+            ...{ url: action.payload }
+          }
+      }
+    case types.petLoadTypes: 
+    return {
+     ...state,
+       tps: [...action.payload ]
+    }
   
     default:
       return state;
   }
-
 }
 

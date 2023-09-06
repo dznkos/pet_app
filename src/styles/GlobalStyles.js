@@ -2,19 +2,14 @@ import { createGlobalStyle} from 'styled-components';
 
 export default createGlobalStyle`
 
-/* @import url('https://fonts.googleapis.com/css2?family=Questrial&display=swap'); */
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 
-:root {
-  --fondo: #000000ec;
-  --black: #000;
-  --white: #fff;
-
+:root {  
+  --loginColor: #1E88F3;
   --text1: rgba(0,0,0,.8);
   --text2: #ef6b19f6;
   --text3: #3c4ac6;
   --textColor1: #B6956A;
-  --textTitle:#7184f3;
+  --textTitle: #7184f3;
   --textAbout: #5e98ef;
   --textArticle: #2b65ca;
   
@@ -33,7 +28,7 @@ export default createGlobalStyle`
   --reputacion3: #fffde5;
   --reputacion4: #f3fee0;
 
-  --family: 'Inter', sans-serif;
+  --family: 'Josefin Sans', sans-serif;
 
   min-height: 100%;
 }
@@ -42,30 +37,27 @@ export default createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
-  // agregado
-  
-  // end agregado
-
-
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: var(--textColor1);
+  //color: ${({theme}) => theme.text};
   font-weight: inhert;
 }
 
 html{
   min-height: 100%;
-  /* background-color: var(--fondo); */
+  background-color: ${({theme}) => theme.hbg}; 
+}
 
+body {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 *, button, input{
-
   border: 0;
-  /* background-color: none; */
   font-family: var(--family);
-
 }
+
 `

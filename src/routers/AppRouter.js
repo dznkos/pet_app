@@ -1,39 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector  } from 'react-redux';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { startChecking } from '../actions/auth';
 import { HomeScreen } from '../components/Home/HomeScreen/HomeScreen';
 import { Main } from '../components/Home/Main/Main';
-import { MascotaNew } from '../components/MascotaNew/MascotaNew';
-import { MascotaScreen } from '../components/MascotaScreen/MascotaScreen';
-import { MascotaUpdate } from '../components/MascotaUpdate/MascotaUpdate';
 import AuthRouter from './Auth/AuthRouter';
 import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
+import { PetScreen } from '../components/PetScreen/PetScreen';
+import { PetGallery } from '../components/PetGallery/PetGallery';
+import { PetFavorite } from '../components/PetFavorite/PetFavorite';
+import { PetNew } from '../components/PetNew/PetNew';
+import { PetUpdate } from '../components/PetUpdate/PetUpdate';
 
 
-export const AppRouter = () => {
+export const AppRouter = (props) => {
 
   const dispatch = useDispatch();
-  const { checking, uid} = useSelector( state => state.auth );
+  const { checking, uid, role} = useSelector( state => state.auth );
 
   useEffect(() => {
-
-    dispatch(startChecking())  
-
-    // console.log( user )
-    // if( user?.uid ) {
-    //   setIsLoggedIn( true );
-    // } else {
-    //   setIsLoggedIn( false );
-    // }
-
-    
+    dispatch(startChecking())
   }, [dispatch])
 
   if ( checking ) {
-    return ( <h5> Authentication...</h5> )
+    return ( <h5> Authentication... Please wait</h5> )
   }
 
   return (
@@ -46,22 +38,39 @@ export const AppRouter = () => {
           }/>
         <Route exact path='/inicio' element={ 
           <PrivateRoute isAuthenticated={ !!uid } >
-            <HomeScreen children={ <Main/> }/> 
+            <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <Main/> }/> 
           </PrivateRoute>
         }/>
         <Route exact path='/mascotas' element={ 
           <PrivateRoute isAuthenticated={ !!uid } >
-            <HomeScreen children={ <MascotaScreen/> }/> 
+            <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <PetGallery/> }/>            
           </PrivateRoute>
         }/>
+
+        {
+          (role === 'ADMIN')
+          ? 
+          <Route exact path='/panel' element={ 
+            <PrivateRoute isAuthenticated={ !!uid } >
+                <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <PetScreen/> }/> 
+            </PrivateRoute>   
+          }/>
+          :
+          <Route exact path='/favoritos' element={ 
+            <PrivateRoute isAuthenticated={ !!uid } >
+              <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <PetFavorite/> }/> 
+            </PrivateRoute>
+          }/>      
+        }     
+        
         <Route exact path='/create' element={ 
           <PrivateRoute isAuthenticated={ !!uid } >
-            <HomeScreen children={ <MascotaNew/> }/> 
+            <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <PetNew/> }/> 
           </PrivateRoute>
         }/>
         <Route exact path='/update' element={ 
           <PrivateRoute isAuthenticated={ !!uid } >
-            <HomeScreen children={ <MascotaUpdate/> }/> 
+            <HomeScreen theme={props.theme} setTheme={props.setTheme} children={ <PetUpdate/> }/> 
           </PrivateRoute>
         }/>
 

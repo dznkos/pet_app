@@ -18,8 +18,16 @@ export const Container = styled.div`
 
   h1 {
     font-size: 2.25rem;
+    color: #2F8AD0;
   }
 
+  .msgerror {
+    color: #BA1924;
+  }
+
+  .msgerror::after {
+    content:' !';
+  }
 
   button { 
     width: 182px;
@@ -29,14 +37,16 @@ export const Container = styled.div`
     margin-right: 60px;
     margin-bottom: 20px;
 
-    background-color: #B6956A;
+    background-color: ${({theme})=> theme.btn};;
     border-radius: 12px;
 
     color: white;
     font-size: 18px;
     font-weight: 500;
 
-    box-shadow: 3px 3px 3px 1px #ccc;
+    :hover {
+    box-shadow: 2px 2px 5px 1px #000;
+    }
   }
 
 `
@@ -77,12 +87,12 @@ export const Input = styled.input`
     }
 
     :focus {
-      border: 2px solid #B6956A;
-      color: #B6956A;
+      border: 2px solid ${({theme})=> theme.bgc};;
+      color: #000000;
     }
 
     :focus::placeholder {
-      color: #B6956A;
+      color: ${({theme})=> theme.bgc};;
     }
 `
 
@@ -119,12 +129,12 @@ export const TextArea = styled.textarea`
     }
 
     :focus {
-      border: 2px solid #B6956A;
-      color: #B6956A;
+      border: 2px solid ${({theme})=> theme.bgc};;
+      color: #000000;
     }
 
     :focus::placeholder {
-      color: #B6956A;
+      color: ${({theme})=> theme.bgc};;
     }
 `
 
@@ -179,16 +189,17 @@ export const BoxCreate = styled.div`
 `
 
 export const FileSelector = styled.div`
-
-    width: 100%;
+    width: auto;
     height: 100%;
-    max-height:100px;
-  
-    border: 2.2px solid #E3E3E3;
-    background: #FFFFFF;
-    border-style: dashed;
+    max-height:180px;
 
+    display: flex;
+  
     div {
+      width: 100%;
+      border: 2.2px solid #E3E3E3;
+      background: #FFFFFF;
+      border-style: dashed;
       height: 100%;
       display: flex;
 

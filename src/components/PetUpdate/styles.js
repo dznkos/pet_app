@@ -17,6 +17,7 @@ export const Container = styled.div`
   align-items: flex-start;
 
   h1 {
+    color: #2F8AD0;
     font-size: 2.25rem;
   }
 
@@ -29,14 +30,16 @@ export const Container = styled.div`
     margin-right: 60px;
     margin-bottom: 20px;
 
-    background-color: #B6956A;
+    background-color: ${({theme})=> theme.btn};;
     border-radius: 12px;
 
-    color: white;
+    color: #fff;
     font-size: 18px;
     font-weight: 500;
 
-    box-shadow: 3px 3px 3px 1px #ccc;
+    :hover{
+    box-shadow: 1px 1px 8px 1px ${({theme})=> theme.btn};;
+    }
   }
 
 `
@@ -165,21 +168,39 @@ export const Form = styled.form`
 
 export const BoxCreate = styled.div`
 
-/* height: 550px; */
-  /* background-color: blue; */
+  /* height: 550px; */
   width: 100%;
   max-width: 750px;
-  /* background-color :blue ; */
-
   text-align: start;
 
- display: flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+ 
+`
 
- flex-direction: row;
+export const FileSelector = styled.div`
+    width: auto;
+    height: 100%;
+    max-height:180px;
 
- justify-content: flex-start;
-
-
+    display: flex;
   
-  
+    div {
+      width: 100%;
+      border: 2.2px solid #E3E3E3;
+      background: #FFFFFF;
+      border-style: dashed;
+      height: 100%;
+      display: flex;
+
+      justify-content: center;
+      
+      align-items: center;
+
+      p {
+        padding-left: 6px;
+        color: #E3E3E3;
+      }
+    }
 `

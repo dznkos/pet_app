@@ -1,42 +1,35 @@
-
-
-
 import { fetchConToken, fetchSinToken } from '../api/fetch';
 import { types } from '../types/types'
 import { finishLoading, startLoading } from './ui';
-// import { notesLogout } from './notes';
-
-// const LOGIN_URL = "/users/login"
-
 
 export const startLoginEmailPassword = ( email, password) => {
   return async( dispatch ) => {   
 
       dispatch( startLoading() );
-
+      
       const resp = await fetchSinToken('users/login',
           { email, password},
-          'POST');      
+          'POST');
       const body = await resp.json();
         
       if ( body.ok ){
         localStorage.setItem('token', body.token);
         localStorage.setItem('token-init-date', new Date().getTime() );
+        
         dispatch( login({ 
           uid: body.uid, 
           name: body.name } 
         ))
-        dispatch( finishLoading() );
+        dispatch( loadRole(body.role))
       }
       else {
         dispatch( authError({
           error: true,
           msg: body.msg
-        }))
-        dispatch( finishLoading() );
+        }))       
       }
 
-
+      dispatch( finishLoading() );        
   }
 }
 
@@ -50,19 +43,17 @@ export const startChecking = () => {
         
     if ( body.ok ){
       localStorage.setItem('token', body.token);
-      localStorage.setItem('token-init-date', new Date().getTime() );
+      localStorage.setItem('token-init-date', new Date().getTime() );      
       dispatch( login({ 
         uid: body.uid, 
         name: body.name } 
       ))
-      dispatch( finishLoading() );
+      dispatch( loadRole(body.role))
     }
     else {
-
       dispatch( checkingFinish() )
-      dispatch( finishLoading() );
     }
-
+    dispatch( finishLoading() );
   }
 }
 
@@ -105,4 +96,17 @@ export const startLogout = () => {
 const logout = () => ({
   type: types.logout
 
+})
+
+export const loadRole = (userRole) => {
+  return ( dispatch ) => { 
+  dispatch( setRole(userRole) );
+  }
+}
+
+const setRole = (userRole) => ({
+  type: types.authLoadRole,
+  payload: {
+    role: userRole
+  }
 })

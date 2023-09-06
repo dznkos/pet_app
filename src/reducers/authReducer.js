@@ -1,12 +1,8 @@
-
-
 import { types } from '../types/types';
 
 const initialState = {
   checking: true,
-
 }
-
 
 export const authReducer = ( state= initialState, action )=> {
 
@@ -41,6 +37,12 @@ export const authReducer = ( state= initialState, action )=> {
       return {
         ...state,
         checking: false,
+      }
+    
+    case types.authLoadRole:
+      return {
+       ...state,
+       ...action.payload
       }
   
     default:

@@ -26,22 +26,6 @@ const Container = styled.div`
   color: rgba(0,0,139, 0.7);
   `;
 
-const Header = styled.div`
-  
-`
-const HBar = styled.div`
-  
-`
-const Slot = styled.div`
-  
-`  
-const ButtonBar = styled.div`
-  
-`
-const Button = styled.div`
-  
-`  
-
 export default function ConfirmationModal(props) {
   const {
       handleClose, // renderProp fn expects truthy or falsey
@@ -57,13 +41,13 @@ export default function ConfirmationModal(props) {
   return (
       <Model show={show}>
           <Container >
-              <Header>{headerText}</Header>
-              <HBar/>
-              <Slot>{detailText}</Slot>
-              <ButtonBar>
-                  <Button onClick={sendYes} primary={true}>Yes</Button>
-                  <Button onClick={sendNo} primary={false}>No</Button>
-              </ButtonBar>
+              <div>{headerText}</div>
+              <div/>
+              <div>{detailText}</div>
+              <div>
+                  <div onClick={sendYes} primary={true}>Yes</div>
+                  <div onClick={sendNo} primary={false}>No</div>
+              </div>
           </Container>
       </Model>
   );

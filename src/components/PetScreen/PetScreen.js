@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { Container, BoxMascotas, Data, NavLinkStyle, ButtonDel, ButtonCancel, Actions } from './styles'
+import { Container, BoxMascotas, Data, NavLinkStyle, ButtonDel, ButtonCancel, Actions, Controls } from './styles'
 
 import  { TrashAlt} from '@styled-icons/fa-solid/TrashAlt';
 import { Pencil } from '@styled-icons/boxicons-solid/Pencil';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { petDelete, petsStartLoading, petClearActive } from '../../actions/pets';
+import { petDelete, petsStartLoading, petClearActive, petGetTypes } from '../../actions/pets';
 import { CustomModal } from '../ModalAlert/ModalAlert';
 
-export const MascotaScreen = () => {
+export const PetScreen = () => {
 
   const dispatch = useDispatch();
   const { pets } = useSelector( state => state.pets)
@@ -34,26 +34,24 @@ export const MascotaScreen = () => {
   }
 
   useEffect(() => {
-
     dispatch(petClearActive())
-
-  }, [])
+  }, [dispatch])
   
   
-  useEffect(() => {
-    
+  useEffect(() => {    
     dispatch( petsStartLoading() );    
-
-  }, [dispatch ]) 
+    dispatch( petGetTypes() );
+  }, [dispatch]) 
   
   return (
     <Container>
       
-        <NavLinkStyle to="/create" exact="true">
-          Crear mascota
-        </NavLinkStyle>  
 
       <BoxMascotas>       
+        <NavLinkStyle to="/create" exact="true">
+          Agregar mascota
+        </NavLinkStyle>  
+
         <ul>
           {
             pets?.map( (pet, i) => (
@@ -62,10 +60,10 @@ export const MascotaScreen = () => {
                   <p>{ i+1 }</p>
                   <h4>{ pet.name }</h4>
                 </Data>
-                <Data>
+                <Controls>
                   <NavLink to='/update' state={{ mypet: pet}}><i ><Pencil width={ 20 } height={ 20 } color={ '#B6956A' }/></i></NavLink>
                   <i onClick={ ()=> AlertDeletePet( pet._id ) }><TrashAlt width={ 20 } height={ 20 } color={ 'red' }/></i>        
-                </Data>
+                </Controls>
               </li>
 
             ))
