@@ -20,8 +20,8 @@ export const Nav = styled.nav`
   width: 100%;
   
   position: relative;
-  display: flex;
 
+  display: flex;
   justify-content: end;
   align-items : center;
 
@@ -87,6 +87,13 @@ export const SwitchMode = styled.div`
   border-radius:25px;
   background-color: ${({theme}) => theme.toggle};
   transition: 1s all ease-in;
+
+  @media (max-width: 350px) {      
+
+    position:absolute;
+    bottom: 5px;
+    right: 90px;    
+  }  
 `
 export const SwitchButton = styled.button`
   position: absolute;

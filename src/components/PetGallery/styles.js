@@ -181,8 +181,8 @@ export const ContentDiv = styled.div`
  
   @media (max-width: 950px) {  
     background: none;
-    width: 70%;
-    height: 100%;
+    width: 90%;
+    height: 70%;
     display: flex;
     flex-direction: column;
   }  
@@ -218,8 +218,9 @@ export const DataPet = styled.div`
       transition: all 1.5s ease-in-out;
     }
     h2 {
+      font-size: 1rem;
       position: absolute;
-      top: 17%;
+      top: 14%;
       rigth: 5%;
       transition: 2.5s ease;
     }
@@ -239,6 +240,16 @@ export const DataPet = styled.div`
       transition: all 1.5s ease-in-out;
     }   
   }  
+  @media (max-width: 350px) {      
+
+    h4  {
+      font-size: 0.75rem;
+      position: absolute;
+      top: 5%;
+      left: 25%;
+      transition: all 1.5s ease-in-out;
+    }   
+  }  
 
 `
 
@@ -254,7 +265,7 @@ export const DescDetail = styled.p`
 
 export const NameDetail = styled.h4`
   text-align: center;
-  font-size: 1.3rem;
+  font-size: 1rem;
   padding: 7px 12px 7px 12px;
   border-radius: 5px;
   color: var(--textAbout);

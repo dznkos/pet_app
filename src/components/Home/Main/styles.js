@@ -3,10 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
   
   min-height: 100%;
-  // height: 100%
-  padding-top: 60px;
-  padding-left: 60px;  
-  padding-right: 60px;  
+  padding: 60px;  
   text-align: start;
 
   h1 { 

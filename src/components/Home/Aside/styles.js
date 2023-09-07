@@ -22,7 +22,7 @@ export const StyleUl = styled.ul`
   }
   
   a{
-    min-width: 177px;
+    // min-width: 177px;
     text-decoration: none;
   }
 

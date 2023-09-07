@@ -9,10 +9,9 @@ export const MyFooter = styled.div`
   justify-content: center;
   align-items: center;
   box-shadow: 5px 3px 12px rgba(0,0,0,0.3);
+  padding: 0px 55px;
 
   h5 {
     color: ${({theme})=> theme.text};
   }
-  // background-color: blue;
-
 `
