@@ -7,6 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { petDelete, petsStartLoading, petClearActive, petGetTypes } from '../../actions/pets';
 import { CustomModal } from '../ModalAlert/ModalAlert';
+import { Link } from 'react-router-dom';
 
 export const PetScreen = () => {
 
@@ -26,10 +27,11 @@ export const PetScreen = () => {
 
   const AlertDeletePet = ( id ) => {
     setShowModal( { petid: id, show: true } );
-
   }
+  
   const deletePet = ( ) => {
     dispatch( petDelete(showModal.petid) );
+    
     hideModal()
   }
 
@@ -78,11 +80,14 @@ export const PetScreen = () => {
         <h3>¿Estas seguro que quieres eliminar?</h3>
 
         <Actions>
-          <ButtonDel
-            onClick={ deletePet }
-          >
-            Eliminar
-          </ButtonDel>
+          <Link to="/mascotas">
+            <ButtonDel
+              onClick={ deletePet }
+            >
+              Eliminar
+            </ButtonDel>
+          </Link> 
+         
           <ButtonCancel
             onClick={ hideModal }
           >

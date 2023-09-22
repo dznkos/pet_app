@@ -150,8 +150,10 @@ export const Controls = styled.div`
 
 export const ButtonDel = styled.button`
   
-  width: 30%;  
-  min-height: 40px;
+  max-width: 100%;  
+  max-height: 60px;
+  height: 50px;
+  padding: 6px;
   border-radius: 10px;
   background-color: red;
   color: white;
@@ -159,8 +161,10 @@ export const ButtonDel = styled.button`
 
 export const ButtonCancel = styled.button`
   
-  width: 30%;   
-  min-height: 40px;
+  max-width: 100%;  
+  max-height: 50px;
+  height: 50px;
+  padding: 6px;
   border-radius: 10px;
   background-color: #B6956A;
   color: white;
@@ -168,4 +172,11 @@ export const ButtonCancel = styled.button`
 export const Actions = styled.div`
   
   display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+ 
+  button {
+    margin: 0;
+  }
 `
